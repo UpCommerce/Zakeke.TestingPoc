@@ -2,16 +2,16 @@
 using Calculator.Math;
 using Calculator.UserInput;
 using System;
-using Zakeke.Testing.UserInput.Fixture;
 using Xunit.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
+using Zakeke.Testing.Integration.UserInput.Fixture;
 
-namespace Zakeke.Testing.UserInput;
+namespace Zakeke.Testing.Integration.UserInput;
 
-public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestsBed>
+public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
 {
 
-    public ConsoleMaskTests(ConsoleMaskTestsBed testBed,  ITestOutputHelper helper )
+    public ConsoleMaskTests(ConsoleMaskTestBed testBed, ITestOutputHelper helper)
     {
         //Esempio di dependency injection
         var provider = testBed.GetServiceProvider(helper);
@@ -19,7 +19,7 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestsBed>
 
 
         if (mask.isInjected())
-        {            
+        {
             Console.WriteLine("success");
         }
     }

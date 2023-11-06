@@ -4,14 +4,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection;
 using Xunit.Microsoft.DependencyInjection.Abstracts;
 
-namespace Zakeke.Testing.UserInput.Fixture
+namespace Zakeke.Testing.Integration.UserInput.Fixture
 {
-    public class ConsoleMaskTestsBed : TestBedFixture, IAsyncLifetime
+    public class ConsoleMaskTestBed : TestBedFixture, IAsyncLifetime
     {
         public Task InitializeAsync()
         {
             //Everything needed to initialize a test, in our case nothing particular
-            return Task.CompletedTask; 
+            return Task.CompletedTask;
         }
 
         protected override void AddServices(IServiceCollection services, IConfiguration? configuration)
@@ -27,7 +27,7 @@ namespace Zakeke.Testing.UserInput.Fixture
 
         Task IAsyncLifetime.DisposeAsync()
         {
-            //Everything needed to dispose a test, in our case nothing
+            //Everything needed to dispose a test goes here
 
             return Task.CompletedTask;
         }
