@@ -1,47 +1,42 @@
-Salve a te,
 
-hai appena aperto la Proof of Concept (POC da adesso in poi) del testing di Zakeke.
+Il file di readme è stato scritto con un linguaggio comprensibile e ben strutturato, tuttavia, posso suggerire alcune correzioni per migliorare la grammatica e la chiarezza del testo:
 
-Questo progetto contiene gli elementi essenziali per allestire il testing automatico di un applicativo.
+Salve,
 
-Dentro Zakeke.Testing trovi i test veri e propri, mentre Calculator contiene una Console Application il cui scheletro è
-dato da una classe statica (Operations) e una classe non statica (ConsoleMask)
+Hai appena aperto la Proof of Concept (POC) di Zakeke dedicata al testing.
 
-La classe Operations sarà usata per esplorare il component testing, UserMask invece è utilizzata per un esempio di Dependency Injection.
+Questo progetto contiene gli elementi fondamentali per configurare il testing automatico di un'applicazione.
 
-I test di integrazione si differenziano dai test unitari perché, per funzionare,  necessitano di integrare tra loro dipendenze esterne. 
+All'interno di Zakeke.Testing troverai i test propriamente detti, mentre Calculator contiene una Console Application strutturata attorno a una classe statica (Operations) e una classe non statica (ConsoleMask).
 
-Un test è di integrazione quando per il suo funzionamento necessita di integrare dipendenze o applicativi diversi.
+La classe Operations verrà utilizzata per approfondire il testing dei componenti, mentre ConsoleMask serve come esempio di Dependency Injection.
 
-Per semplicità, in questa POC non saranno veramente chiamati sistemi esterni.
+I test di integrazione si distinguono dai test unitari poiché richiedono l'integrazione di dipendenze esterne per funzionare.
 
-Nel nostro caso di integration test, ci limiteremo quindi a iniettare le dipendenze, per fare questo avremo
-bisogno di un letto di test.
-Il letto di test è l'elemento cardine della Dependency Injection, in quanto permette di allacciare al test un container di Dependency Injection.
+Un test si considera di integrazione quando necessita dell'integrazione di dipendenze o applicativi differenti.
 
-Il letto di test è responsabile di registrare le dipendenze , configurarle, e gestirne il ciclo di vita , in tal senso, "decide"  quali
-dipendenze saranno accessibili al Dependency Injection provider nel test vero e proprio.
+Per semplicità, in questa POC non verranno effettuate vere e proprie chiamate a sistemi esterni.
 
-Il letto di test si chiama ConsoleMaskTestBed, e le dipendenze hanno questo ciclo di vita:
+Nei nostri test di integrazione, ci limiteremo a iniettare le dipendenze. Per fare ciò, necessitiamo di un ambiente di test, che è il fulcro della Dependency Injection, in quanto consente di collegare al test un container per la Dependency Injection.
 
-a) Inizializzazione: viene chiamato il costruttore, subito dopo, viene immediatamente chiamato il metodo "InitializeAsync".
+L'ambiente di test, denominato ConsoleMaskTestBed, è responsabile di registrare e configurare le dipendenze, oltre a gestirne il ciclo di vita. In questo contesto, "decide" quali dipendenze saranno accessibili al provider di Dependency Injection durante l'esecuzione del test.
 
-Tipicamente, in questa fase si configura l'ambiente di test, possono essere fatte delle login, oppure possono essere preparati i dati di test.
+L'ambiente di test gestisce le dipendenze secondo le seguenti fasi:
 
-b) Vengono chiamati i metodi di registrazione dei servizi e di configurazione, ovvero:
-	a1) GetTestAppSettings (recupera il file appsettings.test.json)
-	a2) AddServices (registra le dipendenze di test)
+a) Inizializzazione: si invoca il costruttore e, immediatamente dopo, il metodo InitializeAsync. Questa fase è solitamente dedicata alla configurazione dell'ambiente di test, al login o alla preparazione dei dati necessari.
 
-c) Viene Costruito il test e vengono predisposte le dipendenze
+b) Registrazione e configurazione dei servizi:
 
-d) A conclusione, vengono chiamati i metodi di dispose del letto di test, vengono poi chiamati i metodi di dispose
-del metodo IAsyncLifetime
+- GetTestAppSettings (recupera il file appsettings.test.json)
+- AddServices (registra le dipendenze necessarie per il test)
 
-Evidentemente, c'è una ridondanza dei metodi di dispose, uno deriva dall'implementazione di IAsyncLifeTime, l'altro dall'override
-della classe astratta TestBedFixture, non è strettamente necessario modificare entrambi i metodi, per convenzione, si suggerisce
-di non modificare il metodo di override di TestBedFixture, ovvero DisposeAsyncCore, e di gestire tutte le operazioni di chiusura
-nel metodo asincrono DisposeAsync proveniente da IAsyncLifeTime.
+c) Costruzione dell'ambiente di test e preparazione delle dipendenze.
 
-I test sono tutti idempotenti, una proprietà importante perché permette di ripetere i test a oltranza senza rischio di alterare l'ambiente di test vero e proprio.
+d) In conclusione, si procede con la distruzione dell'ambiente di test, invocando i metodi Dispose previsti da IAsyncLifetime.
 
-I test di integrazione sono raggruppati dentro la cartella "Integration", mentre i test unitari dentro la cartella "Component"
+Esiste una ridondanza nei metodi di distruzione: uno derivante dall'implementazione di IAsyncLifetime e l'altro dall'override nella classe astratta TestBedFixture. Non è strettamente necessario modificare entrambi i metodi. Per convenzione, si raccomanda di non modificare il metodo DisposeAsyncCore di TestBedFixture e di gestire tutte le operazioni di chiusura nel metodo DisposeAsync di IAsyncLifetime.
+
+I test sono idempotenti, una caratteristica importante che consente di ripeterli più volte senza il rischio di alterare l'ambiente di test reale.
+
+I test di integrazione sono organizzati nella cartella "Integration", mentre i test unitari si trovano nella cartella "Component".
+
