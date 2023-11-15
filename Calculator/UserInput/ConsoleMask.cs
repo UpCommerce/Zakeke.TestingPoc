@@ -4,7 +4,7 @@ namespace Calculator.UserInput
 {
     public class ConsoleMask
     {
-        public static Func<int, int, int> DetermineUserOperation(string? operation)
+        public  Func<int, int, int> DetermineUserOperation(string? operation)
         {
 
             var func = operation switch
@@ -18,7 +18,7 @@ namespace Calculator.UserInput
             return func;
         }
 
-        public static void DetermineUserInput(string? x, string? y, out int valx, out int valy)
+        public void DetermineUserInput(string? x, string? y, out int valx, out int valy)
         {
             if (!Int32.TryParse(x, out valx)) throw new InvalidDataException("Invalid data supplied");
             if (!Int32.TryParse(y, out valy)) throw new InvalidDataException("Invalid data supplied");

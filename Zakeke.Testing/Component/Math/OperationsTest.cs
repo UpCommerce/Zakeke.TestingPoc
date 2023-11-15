@@ -2,6 +2,7 @@ using Calculator.Math;
 
 // Replace with the actual namespace of your Calculator class
 namespace Zakeke.Testing.Component.Math;
+
 public class CalculatorTests
 {
     [Theory]

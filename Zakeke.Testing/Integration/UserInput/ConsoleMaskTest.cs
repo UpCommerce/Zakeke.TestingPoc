@@ -11,14 +11,15 @@ namespace Zakeke.Testing.Integration.UserInput;
 public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
 {
 
+    private readonly ConsoleMask _mask;
     public ConsoleMaskTests(ConsoleMaskTestBed testBed, ITestOutputHelper helper)
     {
         //Esempio di dependency injection
         var provider = testBed.GetServiceProvider(helper);
-        var mask = provider.GetRequiredService<ConsoleMask>();
+        _mask = provider.GetRequiredService<ConsoleMask>();
 
 
-        if (mask.isInjected())
+        if (_mask.isInjected())
         {
             Console.WriteLine("success");
         }
@@ -33,7 +34,7 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
     public void DetermineUserOperation_ValidOperation_ReturnsDelegate(string operation, Type expectedType)
     {
         // Act
-        var result = ConsoleMask.DetermineUserOperation(operation);
+        var result = _mask.DetermineUserOperation(operation);
 
         // Assert
         Assert.IsType(expectedType, result);
@@ -46,7 +47,7 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
         string operation = "invalid_operation";
 
         // Act & Assert
-        var exception = Assert.Throws<NotImplementedException>(() => ConsoleMask.DetermineUserOperation(operation));
+        var exception = Assert.Throws<NotImplementedException>(() => _mask.DetermineUserOperation(operation));
         Assert.Equal("Invalid Operation requested", exception.Message);
     }
 
@@ -57,7 +58,7 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
     public void DetermineUserInput_ValidInput_ParsesValuesCorrectly(string x, string y, int expectedValx, int expectedValy)
     {
         // Act
-        ConsoleMask.DetermineUserInput(x, y, out int valx, out int valy);
+        _mask.DetermineUserInput(x, y, out int valx, out int valy);
 
         // Assert
         Assert.Equal(expectedValx, valx);
@@ -70,6 +71,6 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
     public void DetermineUserInput_InvalidInput_ThrowsInvalidDataException(string x, string y)
     {
         // Act & Assert
-        Assert.Throws<InvalidDataException>(() => ConsoleMask.DetermineUserInput(x, y, out int valx, out int valy));
+        Assert.Throws<InvalidDataException>(() => _mask.DetermineUserInput(x, y, out int valx, out int valy));
     }
 }
