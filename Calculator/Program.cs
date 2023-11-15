@@ -2,7 +2,7 @@
 
 using Calculator.UserInput;
 
-Console.WriteLine("Welcome {Environment.UserName}");
+Console.WriteLine("Welcome to the calculator testing POC");
 Console.WriteLine("Type 1 if you want to add two numbers");
 Console.WriteLine("Type 2 if you want to subtract two numbers");
 Console.WriteLine("Type 3 if you want to multiply two numbers");
