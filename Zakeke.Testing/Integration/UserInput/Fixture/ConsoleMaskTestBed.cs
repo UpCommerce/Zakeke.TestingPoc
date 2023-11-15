@@ -16,7 +16,7 @@ namespace Zakeke.Testing.Integration.UserInput.Fixture
 
         protected override void AddServices(IServiceCollection services, IConfiguration? configuration)
         {
-            services.AddScoped<ConsoleMask>();
+            services.AddScoped<IConsoleMask,ConsoleMask>();
         }
         protected override ValueTask DisposeAsyncCore() => new();
 

@@ -9,7 +9,7 @@ Console.WriteLine("Type 3 if you want to multiply two numbers");
 Console.WriteLine("Type 4 if you want to divide two numbers");
 
 var input = Console.ReadLine();
-var mask = new ConsoleMask();
+IConsoleMask mask = new ConsoleMask();
 
 Func<int, int, int> func = mask.DetermineUserOperation(input);
 

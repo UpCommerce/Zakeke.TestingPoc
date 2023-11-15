@@ -5,24 +5,26 @@ using System;
 using Xunit.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using Zakeke.Testing.Integration.UserInput.Fixture;
+using NSubstitute;
 
 namespace Zakeke.Testing.Integration.UserInput;
 
 public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
 {
 
-    private readonly ConsoleMask _mask;
+    private readonly IConsoleMask _mask;
     public ConsoleMaskTests(ConsoleMaskTestBed testBed, ITestOutputHelper helper)
     {
         //Esempio di dependency injection
         var provider = testBed.GetServiceProvider(helper);
-        _mask = provider.GetRequiredService<ConsoleMask>();
+        _mask = provider.GetRequiredService<IConsoleMask>();
 
 
         if (_mask.isInjected())
         {
             Console.WriteLine("success");
         }
+
     }
 
 
@@ -73,4 +75,10 @@ public class ConsoleMaskTests : IClassFixture<ConsoleMaskTestBed>
         // Act & Assert
         Assert.Throws<InvalidDataException>(() => _mask.DetermineUserInput(x, y, out int valx, out int valy));
     }
+
+
+
+
 }
+
+

@@ -2,7 +2,7 @@
 
 namespace Calculator.UserInput
 {
-    public class ConsoleMask
+    public class ConsoleMask : IConsoleMask
     {
         public  Func<int, int, int> DetermineUserOperation(string? operation)
         {
